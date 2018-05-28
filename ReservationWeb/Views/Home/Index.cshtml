@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <p class="lead">Загрузите данные о записях.</p>
+    @*<p><a class="btn btn-primary btn-lg">Загрузить</a></p>*@
+    @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input id="fileInput" type="file" name="file" accept=".xml">
+        <input type="submit" value="Загрузить" /> @ViewBag.UploadStatus
+    }
+
+    Имеющиеся данные: <br />
+    @foreach (string line in ViewBag.Data)
+    {
+        @Html.Raw(line)
+        <br />
+    }
+</div>
