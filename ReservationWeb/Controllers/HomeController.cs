@@ -65,8 +65,7 @@ namespace ReservationWeb.Controllers
                 }
                 Response.Redirect("Index");
             }
-            //catch (Exception e)
-            catch (IndexOutOfRangeException e)
+            catch (Exception e)
             {
                 uploadStatus = "Произошла ошибка.";
                 Response.Redirect("Index");
