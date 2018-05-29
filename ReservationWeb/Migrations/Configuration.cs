@@ -10,7 +10,6 @@ namespace ReservationWeb.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "ReservationWeb.Models.ReservationDbContext";
         }
 
         protected override void Seed(ReservationWeb.Models.ReservationDbContext context)

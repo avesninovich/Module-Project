@@ -11,10 +11,14 @@
         <input type="submit" value="Загрузить" /> @ViewBag.UploadStatus
     }
 
-    Имеющиеся данные: <br />
-    @foreach (string line in ViewBag.Data)
+    @using (Html.BeginForm("Download", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.Raw(line)
-        <br />
+        <input type="submit" value="Сохранить данные в Excel" /> @ViewBag.DownloadStatus
     }
 </div>
+Имеющиеся данные: <br />
+@foreach (string line in ViewBag.Data)
+{
+    @Html.Raw(line)
+    <br />
+}
