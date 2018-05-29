@@ -146,20 +146,31 @@ namespace ReservationWeb.Controllers
 
         public void DisplayReservations()
         {
-            using (var db = new ReservationDbContext())
+            try
             {
-                var reservations = db.ReservationSet.ToArray();
-                reservationsDisplay = new List<string>();
-                foreach (var reservation in reservations)
+                using (var db = new ReservationDbContext())
                 {
-                    reservationsDisplay.Add(
-                        reservation.ClientName + ", " +
-                        reservation.PhoneNumber + ": " +
-                        reservation.ReservationDate + "-" +
-                        reservation.ReservationTime + ": " +
-                        reservation.MakeupArtist + ": " +
-                        reservation.Services);
+                    var reservations = db.ReservationSet.ToArray();
+                    reservationsDisplay = new List<string>();
+                    foreach (var reservation in reservations)
+                    {
+                        reservationsDisplay.Add(
+                            reservation.ClientName + ", " +
+                            reservation.PhoneNumber + ": " +
+                            reservation.ReservationDate + "-" +
+                            reservation.ReservationTime + ": " +
+                            reservation.MakeupArtist + ": " +
+                            reservation.Services);
+                    }
                 }
+            }
+            catch (ArgumentNullException)
+            {
+                reservationsDisplay = new List<string> {"Данных ещё нет."};
+            }
+            catch (Exception)
+            {
+                reservationsDisplay = new List<string> {"Ошибка отображения данных."};
             }
         }
 
