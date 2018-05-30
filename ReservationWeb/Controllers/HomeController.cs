@@ -64,7 +64,7 @@ namespace ReservationWeb.Controllers
             {
                 using (var stream = file.InputStream)
                 {
-                    var newReservations = (Reservation[]) serializer.Deserialize(stream);
+                    var newReservations = (Reservation[])serializer.Deserialize(stream);
                     //reservations.AddRange(newReservations);
                     using (var db = new ReservationDbContext())
                     {
@@ -76,7 +76,7 @@ namespace ReservationWeb.Controllers
                 }
                 Response.Redirect("Index");
             }
-            catch (Exception)
+            catch (IndexOutOfRangeException)
             {
                 uploadStatus = "Произошла ошибка.";
                 Response.Redirect("Index");
@@ -96,7 +96,7 @@ namespace ReservationWeb.Controllers
                 downloadStatus = "Нет данных для наполнения таблицы.";
                 Response.Redirect("Index");
             }
-            catch (Exception)
+            catch (IndexOutOfRangeException)
             {
                 downloadStatus = "Не получилось скачать файл.";
                 Response.Redirect("Index");
@@ -138,7 +138,7 @@ namespace ReservationWeb.Controllers
                 worksheet.Cells[i + 2, 5].Value = reservations[i].MakeupArtist;
                 worksheet.Cells[i + 2, 6].Value = reservations[i].Services;
             }
-            
+
             package.Save();
 
             return File(filePath, "application/ooxml", "Записи.xlsx");
@@ -151,6 +151,8 @@ namespace ReservationWeb.Controllers
                 using (var db = new ReservationDbContext())
                 {
                     var reservations = db.ReservationSet.ToArray();
+                    if (reservations.Length == 0) throw new ArgumentNullException();
+
                     reservationsDisplay = new List<string>();
                     foreach (var reservation in reservations)
                     {
@@ -166,11 +168,11 @@ namespace ReservationWeb.Controllers
             }
             catch (ArgumentNullException)
             {
-                reservationsDisplay = new List<string> {"Данных ещё нет."};
+                reservationsDisplay = new List<string> { "Данных ещё нет." };
             }
-            catch (Exception)
+            catch (IndexOutOfRangeException)
             {
-                reservationsDisplay = new List<string> {"Ошибка отображения данных."};
+                reservationsDisplay = new List<string> { "Ошибка отображения данных." };
             }
         }
 

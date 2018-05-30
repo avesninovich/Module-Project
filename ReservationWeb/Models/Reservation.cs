@@ -22,7 +22,7 @@ namespace ReservationWeb.Models
         public string Services
         {
             get => String.Join(", ", ServiceList);
-            set => ServiceList = value.Split(new [] {", "}, StringSplitOptions.None).ToList();
+            set => ServiceList = value.Split(new[] { ", " }, StringSplitOptions.None).ToList();
         }
         public string ReservationDate => ReservationDateTime.ToString("dd.MM");
         public string ReservationTime => ReservationDateTime.ToString("HH:mm");
