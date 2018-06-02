@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationClass", "Reserva
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationLicense", "ReservationLicense\ReservationLicense.csproj", "{FE5A12E9-5605-45A7-A2E3-5AD653DAA5C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationWeb", "ReservationWeb\ReservationWeb.csproj", "{B164FA10-54AA-4562-ACA3-A7ADAB19C31A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationWeb", "ReservationWeb\ReservationWeb.csproj", "{D635B703-A98C-470A-800C-65CA6DE965F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{FE5A12E9-5605-45A7-A2E3-5AD653DAA5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE5A12E9-5605-45A7-A2E3-5AD653DAA5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE5A12E9-5605-45A7-A2E3-5AD653DAA5C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B164FA10-54AA-4562-ACA3-A7ADAB19C31A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B164FA10-54AA-4562-ACA3-A7ADAB19C31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B164FA10-54AA-4562-ACA3-A7ADAB19C31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B164FA10-54AA-4562-ACA3-A7ADAB19C31A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D635B703-A98C-470A-800C-65CA6DE965F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D635B703-A98C-470A-800C-65CA6DE965F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D635B703-A98C-470A-800C-65CA6DE965F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D635B703-A98C-470A-800C-65CA6DE965F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
