@@ -16,7 +16,7 @@ namespace ReservationWeb.Controllers
         private static string uploadStatus = "";
         private static string downloadStatus = "";
         private static List<string> reservationsDisplay = new List<string>();
-        private static List<Reservation> reservations = new List<Reservation>();
+        //private static List<Reservation> reservations = new List<Reservation>();
 
         private static readonly XmlSerializer serializer = new XmlSerializer(typeof(Reservation[]));
 
@@ -66,12 +66,12 @@ namespace ReservationWeb.Controllers
                 using (var stream = file.InputStream)
                 {
                     var newReservations = (Reservation[])serializer.Deserialize(stream);
-                    reservations.AddRange(newReservations);
-                    //using (var db = new ReservationDbContext())
-                    //{
-                    //    db.ReservationSet.AddRange(newReservations);
-                    //    db.SaveChanges();
-                    //}
+                    //reservations.AddRange(newReservations);
+                    using (var db = new ReservationDbContext())
+                    {
+                        db.ReservationSet.AddRange(newReservations);
+                        db.SaveChanges();
+                    }
                     uploadStatus = "Файл успешно загружен.";
                     DisplayReservations();
                 }
@@ -107,14 +107,14 @@ namespace ReservationWeb.Controllers
 
         private ActionResult GenerateExcel()
         {
-            //Reservation[] reservations;
-            //using (var db = new ReservationDbContext())
-            //{
-            //    reservations = db.ReservationSet.ToArray();
+            Reservation[] reservations;
+            using (var db = new ReservationDbContext())
+            {
+                reservations = db.ReservationSet.ToArray();
 
-            //    if (reservations.Length < 1) throw new EmptyDbException();
-            //}
-            if (reservations.Count < 1) throw new EmptyDbException();
+                if (reservations.Length < 1) throw new EmptyDbException();
+            }
+            //if (reservations.Count < 1) throw new EmptyDbException();
 
             var filePath = HostingEnvironment.ApplicationVirtualPath + "Files/Записи.xlsx";
             FileInfo excelInfo = new FileInfo(Server.MapPath(filePath));
@@ -131,7 +131,7 @@ namespace ReservationWeb.Controllers
             worksheet.Cells[1, 5].Value = "Мастер";
             worksheet.Cells[1, 6].Value = "Услуги";
 
-            for (int i = 0; i < reservations.Count; i++)
+            for (int i = 0; i < reservations.Length; i++)
             {
                 worksheet.Cells[i + 2, 1].Value = reservations[i].ClientName;
                 worksheet.Cells[i + 2, 2].Value = reservations[i].PhoneNumber;
@@ -150,10 +150,10 @@ namespace ReservationWeb.Controllers
         {
             try
             {
-                //using (var db = new ReservationDbContext())
-                //{
-                //    var reservations = db.ReservationSet.ToArray();
-                    if (reservations.Count == 0) throw new EmptyDbException();
+                using (var db = new ReservationDbContext())
+                {
+                    var reservations = db.ReservationSet.ToArray();
+                    if (reservations.Length == 0) throw new EmptyDbException();
 
                     reservationsDisplay = new List<string>();
                     foreach (var reservation in reservations)
@@ -165,7 +165,7 @@ namespace ReservationWeb.Controllers
                             reservation.ReservationTime + ": " +
                             reservation.MakeupArtist + ": " +
                             reservation.Services);
-                    //}
+                    }
                 }
             }
             catch (EmptyDbException)
